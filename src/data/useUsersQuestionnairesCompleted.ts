@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase/client";
 
+/**
+ * A react hook to get the users who have answered questionnaires and all of the questionnaires they have completed
+ * @returns the data and its loading and error states.
+ */
 const useUsersQuestionnairesCompleted = () => {
   const [data, setData] = useState<
     { username: string; questionnairesCompleted: number }[]

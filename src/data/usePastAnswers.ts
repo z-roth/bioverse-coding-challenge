@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabase/client";
 
+/**
+ * A React hook to get all of the past answers for a certain user.
+ * @param username the username of the user to get the answers of.
+ * @returns The past answers data, if the data is loading, and error state.
+ */
 export const usePastAnswers = (username: string) => {
   const [pastAnswers, setPastAnswers] = useState<
     { question_id: number; answers: string[] }[]

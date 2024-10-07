@@ -8,6 +8,10 @@ interface UseQuestionnaireTypesModel {
   error: boolean;
 }
 
+/**
+ * A React hook to return all different types of questionnaires.
+ * @returns The data and its loading and error states.
+ */
 export const useQuestionnaireTypes = (): UseQuestionnaireTypesModel => {
   const [data, setData] = useState<
     Tables<"questionnaire_questionnaires">[] | null

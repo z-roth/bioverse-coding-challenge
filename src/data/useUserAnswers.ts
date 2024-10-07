@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase/client";
 
+/**
+ * A React hook to get a user's past questionnaire results.
+ * @param username the user to lookup.
+ * @returns the data and its loading and error states.
+ */
 const useUserAnswers = (username?: string) => {
   const [data, setData] = useState<
     {

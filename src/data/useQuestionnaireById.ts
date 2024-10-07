@@ -2,6 +2,11 @@ import { supabase } from "@/utils/supabase/client";
 import { Question } from "@/utils/types/question";
 import { useEffect, useState } from "react";
 
+/**
+ * A React hook to receive all questions for a given questionnaire id.
+ * @param id the id of the questionnaire.
+ * @returns the data and its loading and error states
+ */
 export const useQuestionnaireById = (id: number | undefined) => {
   const [data, setData] = useState<Question[] | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
