@@ -6,7 +6,7 @@ import { QuestionBox } from "./QuestionBox";
 import { useAnswers } from "@/context/useAnswers";
 
 const InputQuestion: React.FC<QuestionProps> = ({ data }) => {
-  const { updateAnswers } = useAnswers();
+  const { updateAnswers, answers } = useAnswers();
 
   const handleChange = (answer: string) => {
     updateAnswers({
@@ -17,9 +17,16 @@ const InputQuestion: React.FC<QuestionProps> = ({ data }) => {
     });
   };
 
+  const preFilledValue =
+    answers.find((a) => a.questionId == data.questionId)?.answers[0] ?? "";
+
   return (
     <QuestionBox title={data.question}>
-      <Input type="text" onChange={(e) => handleChange(e.target.value)} />
+      <Input
+        type="text"
+        onChange={(e) => handleChange(e.target.value)}
+        value={preFilledValue}
+      />
     </QuestionBox>
   );
 };

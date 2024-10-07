@@ -6,16 +6,42 @@ import { Answer } from "@/utils/types/answer";
 import { AnswersContext } from "@/context/AnswersContext";
 import { useInsertAnswers } from "@/data/useInsertAnswers";
 import { useRouter } from "next/navigation";
+import { usePastAnswers } from "@/data/usePastAnswers";
+import { useAuth } from "@/auth/useAuth";
 
 interface QuestionnaireFormProps {
   id: number;
 }
 
 const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ id }) => {
+  const { user } = useAuth();
   const { data, loading, error } = useQuestionnaireById(id);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const { insertAnswers, loading: isSubmitting } = useInsertAnswers();
+  const { pastAnswers } = usePastAnswers(user ?? "");
   const router = useRouter();
+
+  useEffect(() => {
+    if (data && pastAnswers.length > 0) {
+      const pastAnswersMap = new Map<number, string[]>(
+        pastAnswers.map((answer) => [answer.question_id, answer.answers])
+      );
+
+      const existingAnswers = data.map((questionData) => {
+        const pastAnswer = pastAnswersMap.get(questionData.questionId);
+        return {
+          questionId: questionData.questionId,
+          questionnaireId: questionData.questionnaireId,
+          type: questionData.type,
+          answers: pastAnswer ? pastAnswer : [],
+        };
+      });
+
+      console.log(existingAnswers);
+
+      setAnswers(existingAnswers);
+    }
+  }, [data, pastAnswers]);
 
   const updateAnswers = (newAnswer: Answer) => {
     setAnswers((prevAnswers) => {
@@ -46,10 +72,6 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ id }) => {
       return prevAnswers;
     });
   };
-
-  useEffect(() => {
-    console.log(answers);
-  }, [answers]); //TODO: Implement caching previously answered questions
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
