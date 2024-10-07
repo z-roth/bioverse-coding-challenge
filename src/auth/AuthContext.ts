@@ -9,5 +9,5 @@ export interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
   user: undefined,
   login: (_) => false,
-  logout: () => console.log("Auth context not implemented!"),
+  logout: () => console.error("Auth provider not provided!"),
 });
