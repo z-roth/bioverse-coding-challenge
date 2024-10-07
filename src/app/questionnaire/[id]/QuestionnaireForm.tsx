@@ -4,6 +4,8 @@ import Question from "./question/Question";
 import { FormEvent, useEffect, useState } from "react";
 import { Answer } from "@/utils/types/answer";
 import { AnswersContext } from "@/context/AnswersContext";
+import { useInsertAnswers } from "@/data/useInsertAnswers";
+import { useRouter } from "next/navigation";
 
 interface QuestionnaireFormProps {
   id: number;
@@ -12,6 +14,8 @@ interface QuestionnaireFormProps {
 const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ id }) => {
   const { data, loading, error } = useQuestionnaireById(id);
   const [answers, setAnswers] = useState<Answer[]>([]);
+  const { insertAnswers, loading: isSubmitting } = useInsertAnswers();
+  const router = useRouter();
 
   const updateAnswers = (newAnswer: Answer) => {
     setAnswers((prevAnswers) => {
@@ -47,8 +51,22 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ id }) => {
     console.log(answers);
   }, [answers]); //TODO: Implement caching previously answered questions
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (data && answers.length < data.length) {
+      alert(
+        "Please verify that you have answered all questions and try again."
+      );
+    } else {
+      try {
+        await insertAnswers(answers, id);
+        alert("Successfully submitted questionnaire!");
+        router.push("/questionnaire-select");
+      } catch (error) {
+        alert("Error submitting questionnaire, please try again.");
+        console.error(error);
+      }
+    }
   };
 
   if (loading) {
@@ -84,7 +102,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ id }) => {
         {data.map((questionData, idx) => (
           <Question data={questionData} key={idx} />
         ))}
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{isSubmitting ? <Spinner /> : "Submit"}</Button>
       </Flex>
     </AnswersContext.Provider>
   );
