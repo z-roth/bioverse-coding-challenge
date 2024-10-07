@@ -11,8 +11,6 @@ interface UserModalProps {
 const UserModal: React.FC<UserModalProps> = ({ open, onClose, username }) => {
   const { data: answers, loading, error } = useUserAnswers(username);
 
-  console.log(answers);
-
   return (
     <Modal open={open} onClose={onClose}>
       <Flex sx={{ p: 4, alignItems: "center", flexDirection: "column" }}>

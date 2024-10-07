@@ -36,9 +36,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ id }) => {
           answers: pastAnswer ? pastAnswer : [],
         };
       });
-
-      console.log(existingAnswers);
-
+      
       setAnswers(existingAnswers);
     }
   }, [data, pastAnswers]);
