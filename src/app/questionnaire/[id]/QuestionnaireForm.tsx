@@ -81,7 +81,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({ id }) => {
       );
     } else {
       try {
-        await insertAnswers(answers, id);
+        await insertAnswers(answers);
         alert("Successfully submitted questionnaire!");
         router.push("/questionnaire-select");
       } catch (error) {
