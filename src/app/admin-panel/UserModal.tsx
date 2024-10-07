@@ -27,8 +27,7 @@ const UserModal: React.FC<UserModalProps> = ({ open, onClose, username }) => {
                   sx={{ fontWeight: "bold" }}
                 >{`${username} - ${q.questionnaireName}`}</Text>
                 <Flex sx={{ flexDirection: "column", gap: 1 }}>
-                  {/* // more issues with typing from supabase
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any  */}
+                  {/* // more issues with typing from supabase*/}
                   {q.answers.map((answer: any, i) => (
                     <Text key={i}>
                       {`Q: ${answer.question.question} A: ${answer.answer}`}

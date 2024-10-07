@@ -43,9 +43,7 @@ const useUserAnswers = (username?: string) => {
 
       answers.forEach((answer) => {
         console.log(answer);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const questionnaires: any = answer.questionnaire_questionnaires; // I try not to use any, but there was some problem between supabase's actual and expected types I couldn't figure out.
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const questions: any = answer.questionnaire_questions;
         const questionnaireName = questionnaires.name;
         const questionText = questions.question;

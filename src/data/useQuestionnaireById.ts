@@ -32,7 +32,6 @@ export const useQuestionnaireById = (id: number | undefined) => {
       } else {
         if (fetchedData) {
           const formattedData = fetchedData.map((q): Question => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const questionData = q.questionnaire_questions as any; // issue with type mismatch between what supabase returns and what is expected, had to use "any"
             return {
               questionnaireId: id,
