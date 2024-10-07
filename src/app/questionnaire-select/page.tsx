@@ -3,8 +3,10 @@
 import { Button, Container, Select, Spinner, Text } from "theme-ui";
 import QuestionnaireSelect from "./QuestionnaireSelect";
 import { useAuth } from "@/auth/useAuth";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 
 const QuestionnaireSelectPage: React.FC = () => {
+  useProtectedRoute();
   const { logout } = useAuth();
 
   return (

@@ -5,8 +5,10 @@ import { Button, Container, Flex, Text } from "theme-ui";
 import UsersList from "./UsersList";
 import UserModal from "./UserModal";
 import { useAuth } from "@/auth/useAuth";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 
 const AdminPanel: React.FC = () => {
+  useProtectedRoute(true);
   const [selectedUser, setSelectedUser] = useState<string | undefined>();
   const [modalOpen, setModalOpen] = useState(false);
   const { logout } = useAuth();

@@ -5,8 +5,10 @@ import { useParams } from "next/navigation";
 import { Container, Text } from "theme-ui";
 import QuestionnaireForm from "./QuestionnaireForm";
 import { useEffect, useState } from "react";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 
 const QuestionnairePage: React.FC = () => {
+  useProtectedRoute();
   const { id } = useParams();
   const parsedId = parseInt(id as string, 10);
 
