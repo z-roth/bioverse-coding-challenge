@@ -32,7 +32,7 @@ const QuestionnairePage: React.FC = () => {
         flexDirection: "column",
         justifyContent: "center",
         height: "100%",
-        pt: 40,
+        py: 40,
       }}
     >
       <Text variant="heading2">{title}</Text>
