@@ -17,7 +17,7 @@ export const useQuestionnaireTypes = (): UseQuestionnaireTypesModel => {
 
   useEffect(() => {
     const fetchQuestionnaireTypes = async () => {
-      let { data: fetchedData, error: fetchError } = await supabase
+      const { data: fetchedData, error: fetchError } = await supabase
         .from("questionnaire_questionnaires")
         .select("*");
 

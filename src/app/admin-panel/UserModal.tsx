@@ -21,12 +21,14 @@ const UserModal: React.FC<UserModalProps> = ({ open, onClose, username }) => {
         {error && <Text variant="heading3">Error loading user answers.</Text>}
         {answers && answers.length > 0 ? (
           <Box>
-            {answers.map((q) => (
-              <Box sx={{ paddingY: 2 }}>
+            {answers.map((q, idx) => (
+              <Box sx={{ paddingY: 2 }} key={idx}>
                 <Text
                   sx={{ fontWeight: "bold" }}
                 >{`${username} - ${q.questionnaireName}`}</Text>
                 <Flex sx={{ flexDirection: "column", gap: 1 }}>
+                  {/* // more issues with typing from supabase
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any  */}
                   {q.answers.map((answer: any, i) => (
                     <Text key={i}>
                       {`Q: ${answer.question.question} A: ${answer.answer}`}

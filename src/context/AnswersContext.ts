@@ -8,5 +8,5 @@ export interface AnswersContextType {
 
 export const AnswersContext = createContext<AnswersContextType>({
   answers: [],
-  updateAnswers: (_) => console.error("Answers provider not provided!"),
+  updateAnswers: () => console.error("Answers provider not provided!"),
 });

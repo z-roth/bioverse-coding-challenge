@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Container, Select, Spinner, Text } from "theme-ui";
+import { Button, Container } from "theme-ui";
 import QuestionnaireSelect from "./QuestionnaireSelect";
 import { useAuth } from "@/auth/useAuth";
 import { useProtectedRoute } from "@/hooks/useProtectedRoute";

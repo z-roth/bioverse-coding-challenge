@@ -8,7 +8,7 @@ export const useInsertAnswers = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
-  const insertAnswers = async (answers: Answer[], questionnaireId: number) => {
+  const insertAnswers = async (answers: Answer[]) => {
     const sessionId = uuidv4();
     setLoading(true);
 

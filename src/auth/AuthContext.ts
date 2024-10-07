@@ -8,6 +8,6 @@ export interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType>({
   user: undefined,
-  login: (_) => false,
+  login: () => false,
   logout: () => console.error("Auth provider not provided!"),
 });
