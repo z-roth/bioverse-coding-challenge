@@ -14,7 +14,9 @@ const QuestionnaireSelect: React.FC = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    router.push(`/questionnaire/${selectedQuestionnaireID}`);
+    if (selectedQuestionnaireID) {
+      router.push(`/questionnaire/${selectedQuestionnaireID}`);
+    }
   };
 
   if (loading) {
@@ -54,7 +56,9 @@ const QuestionnaireSelect: React.FC = () => {
           </option>
         ))}
       </Select>
-      <Button type="submit">Submit</Button>
+      <Button type="submit" disabled={!selectedQuestionnaireID}>
+        Submit
+      </Button>
     </Flex>
   );
 };
